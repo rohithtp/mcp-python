@@ -104,6 +104,47 @@ python client_server.py
 
 - **Tools**:
   - `add`: Adds two numbers. Can be called via MCP client using `session.call_tool("add", arguments={"a": 2, "b": 3})`.
+  - `list_tools`: Lists all available tools and their schemas for introspection.
+  - `list_resources`: Lists all available resources and their schemas for introspection.
+  - `get_server_info`: Returns comprehensive server information and capabilities.
 
 - **Resources**:
   - `greeting://{name}`: Returns a personalized greeting. Can be accessed via MCP client using `session.read_resource("greeting://Alice")`.
+
+## MCP Introspection
+
+This server includes introspection tools that allow AI agents to dynamically discover and understand server capabilities:
+
+### Using Introspection Tools
+
+1. **Discover Server Capabilities**:
+   ```python
+   # Get comprehensive server information
+   server_info = await session.call_tool("get_server_info", {})
+   ```
+
+2. **List Available Tools**:
+   ```python
+   # Discover all available tools and their schemas
+   tools = await session.call_tool("list_tools", {})
+   ```
+
+3. **List Available Resources**:
+   ```python
+   # Discover all available resources and their schemas
+   resources = await session.call_tool("list_resources", {})
+   ```
+
+### Running the Introspection Demo
+
+To see introspection in action, run the demo script:
+
+```bash
+uv run python introspection_demo.py
+```
+
+This will demonstrate how AI agents can:
+- Discover server capabilities dynamically
+- Understand tool schemas and parameters
+- Learn about available resources
+- Use discovered tools and resources programmatically

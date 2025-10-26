@@ -23,5 +23,39 @@ class TestServer(unittest.TestCase):
         # Extract the content from the MCP response
         self.assertEqual(result[0].content, "Hello, Alice!")
 
+    def test_list_tools_introspection(self):
+        # Test the list_tools introspection tool
+        async def run_test():
+            result = await mcp.call_tool("list_tools", {})
+            return result
+        
+        result = asyncio.run(run_test())
+        # Check that the result contains tool information
+        self.assertIn("tools", result[0].text)
+        self.assertIn("add", result[0].text)
+
+    def test_list_resources_introspection(self):
+        # Test the list_resources introspection tool
+        async def run_test():
+            result = await mcp.call_tool("list_resources", {})
+            return result
+        
+        result = asyncio.run(run_test())
+        # Check that the result contains resource information
+        self.assertIn("resources", result[0].text)
+        self.assertIn("greeting://", result[0].text)
+
+    def test_get_server_info_introspection(self):
+        # Test the get_server_info introspection tool
+        async def run_test():
+            result = await mcp.call_tool("get_server_info", {})
+            return result
+        
+        result = asyncio.run(run_test())
+        # Check that the result contains server information
+        self.assertIn("server_name", result[0].text)
+        self.assertIn("Demo", result[0].text)
+        self.assertIn("capabilities", result[0].text)
+
 if __name__ == "__main__":
     unittest.main()

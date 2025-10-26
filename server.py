@@ -17,3 +17,9 @@ def add(a: int, b: int) -> int:
 def get_greeting(name: str) -> str:
     """Get a personalized greeting"""
     return f"Hello, {name}!"
+
+
+# Run the server
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(mcp.run_stdio_async())

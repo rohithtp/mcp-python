@@ -40,7 +40,22 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 python server.py
 ```
 
-The server will run as a stdio server, communicating via standard input/output. This is the standard way MCP servers work.
+The server will run as a stdio server in the foreground, communicating via standard input/output. This is the standard way MCP servers work. The server will wait for MCP client connections and can be stopped with `Ctrl+C`.
+
+### Stopping the Server
+
+**If running in foreground:**
+- Press `Ctrl+C` in the terminal where the server is running
+
+**If running in background:**
+```bash
+# Find and kill the server process
+pkill -f "python server.py"
+
+# Or find the process ID first, then kill it
+ps aux | grep "python server.py"
+kill <process_id>
+```
 
 ## Installing New Dependencies
 
